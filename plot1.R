@@ -1,0 +1,12 @@
+setwd("e://my learning/coursera/Exploratory analysis/week 4")
+NEI <- readRDS("./data/summarySCC_PM25.rds")
+SCC <- readRDS("./data/Source_Classification_Code.rds")
+dir()
+head(NEI)
+head(SCC)
+totalEmi <- aggregate(NEI$Emissions, list(NEI$year), sum)
+png("plot1.png", 480, 480, "px")
+plot(totalEmi, type = "l", xlab = "Year", main = "US PM2.5 total emissions",
+     ylab= expression('Tons of PM'[2.5]*" emissions") 
+    , col = "red")
+dev.off()

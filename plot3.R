@@ -1,0 +1,16 @@
+setwd("e://my learning/coursera/Exploratory analysis/week 4")
+NEI <- readRDS("./data/summarySCC_PM25.rds")
+SCC <- readRDS("./data/Source_Classification_Code.rds")
+dir()
+library(ggplot2)
+head(NEI)
+head(SCC)
+Baltimore <- subset(NEI, subset=(fips=="24510"))
+head(Baltimore)
+g <- ggplot(Baltimore, aes(year, Emissions))
+q <- g + geom_point() + facet_grid(.~ type) + geom_smooth(method = "lm") +
+  labs(x = "year") + labs(y = "PM2.5 emissions in tons") + 
+  labs (title = "Baltimore city total emissions by various type of sources")
+print(q)
+ggsave("plot3.png", width=8, height=4, dpi=480)
+dev.off()
